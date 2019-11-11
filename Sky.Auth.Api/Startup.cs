@@ -31,11 +31,10 @@ namespace Sky.Auth.Api
         {
             services
                 .AddSwagger()
-                .AddLogging()
-                //.RegisterHandlers()
-                .RegisterOptions(Configuration);
+                .RegisterHandlers()
+                .RegisterOptions(Configuration)
+                .RegisterRepositories();
                 //.AddJwtBearer(Configuration)
-                //.RegisterRepositories();
 
             services.AddMvc(configuration => configuration.Filters.Add(typeof(HttpGlobalExceptionFilter)))
                 .AddJsonOptions(options => options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
@@ -47,8 +46,6 @@ namespace Sky.Auth.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //loggerFactory.AddLog4Net($"log4net.{env.EnvironmentName}.config");
 
             app
                 .ConfigureSwagger()

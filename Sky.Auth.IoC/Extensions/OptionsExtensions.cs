@@ -12,6 +12,7 @@ namespace Sky.Auth.IoC.Extensions
             {
                 option.ConnectionString = configuration.GetSection("MongoOptions:ConnectionString").Value;
                 option.Database = configuration.GetSection("MongoOptions:Database").Value;
+                option.Collection = configuration.GetSection("MongoOptions:Collection").Value;
             });
             
             return services;

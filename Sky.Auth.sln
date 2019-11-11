@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Api", "Sky.Auth.Api\Sky.Auth.Api.csproj", "{A5442BF7-15A9-4179-AEB4-93C4F2D5AB7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Api", "Sky.Auth.Api\Sky.Auth.Api.csproj", "{A5442BF7-15A9-4179-AEB4-93C4F2D5AB7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Command", "Sky.Auth.Command\Sky.Auth.Command.csproj", "{ADDC1813-F781-4976-87CB-635B790C2664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Command", "Sky.Auth.Command\Sky.Auth.Command.csproj", "{ADDC1813-F781-4976-87CB-635B790C2664}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Data", "Sky.Auth.Data\Sky.Auth.Data.csproj", "{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Data", "Sky.Auth.Data\Sky.Auth.Data.csproj", "{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.CrossCutting", "Sky.Auth.CrossCutting\Sky.Auth.CrossCutting.csproj", "{B749F05E-183D-4103-9025-6E124F620CA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.CrossCutting", "Sky.Auth.CrossCutting\Sky.Auth.CrossCutting.csproj", "{B749F05E-183D-4103-9025-6E124F620CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.IoC", "Sky.Auth.IoC\Sky.Auth.IoC.csproj", "{D0906A66-EF3F-4514-9761-E9C2A4ED9911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.IoC", "Sky.Auth.IoC\Sky.Auth.IoC.csproj", "{D0906A66-EF3F-4514-9761-E9C2A4ED9911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Domain", "Sky.Auth.Domain\Sky.Auth.Domain.csproj", "{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
