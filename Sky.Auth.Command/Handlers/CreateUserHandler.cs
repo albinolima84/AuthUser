@@ -24,7 +24,7 @@ namespace Sky.Auth.Command.Handlers
             try
             {
                 var existUser = await _authRepository.GetUserByEmail(request.Email);
-                if(!string.IsNullOrEmpty(existUser.ObjectId))
+                if(!string.IsNullOrEmpty(existUser.Id))
                 {
                     return Response<CreateUserResponse>.Fail("ExistUser","E-mail já existente");
                 }

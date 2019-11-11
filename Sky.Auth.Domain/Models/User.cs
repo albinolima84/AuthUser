@@ -4,7 +4,7 @@ namespace Sky.Auth.Domain.Models
 {
     public class User
     {
-        public string ObjectId { get; }
+        public string Id { get; }
 
         public string Name { get; }
 
@@ -16,7 +16,7 @@ namespace Sky.Auth.Domain.Models
 
         public User(string objectId, string name, string email, string password, IReadOnlyCollection<Phone> phones)
         {
-            ObjectId = objectId;
+            Id = objectId;
             Name = name;
             Email = email;
             Password = password;

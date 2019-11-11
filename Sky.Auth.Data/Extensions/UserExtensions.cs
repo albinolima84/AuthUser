@@ -21,8 +21,8 @@ namespace Sky.Auth.Data.Extensions
             return numbers;
         }
 
-        internal static UserDto ToDto(this User user) => !string.IsNullOrEmpty(user.ObjectId)  ? 
-            new UserDto { ObjectId = new ObjectId(user.ObjectId), Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto() } : 
+        internal static UserDto ToDto(this User user) => !string.IsNullOrEmpty(user.Id)  ? 
+            new UserDto { ObjectId = new ObjectId(user.Id), Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto() } : 
             new UserDto { Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto() };
 
         internal static IReadOnlyCollection<PhoneDto> ToDto (this IReadOnlyCollection<Phone> phone)
