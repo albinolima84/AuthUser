@@ -37,7 +37,7 @@ namespace Sky.Auth.Api.Controllers
                 return BadRequest(response.Messages);
             }
 
-            return Ok(response.Value.CustomerWallet);
+            return Ok(response.Value);
         }
     }
 }

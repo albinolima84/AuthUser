@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Api", "Sky.Auth.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Command", "Sky.Auth.Command\Sky.Auth.Command.csproj", "{ADDC1813-F781-4976-87CB-635B790C2664}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Data", "Sky.Auth.Data\Sky.Auth.Data.csproj", "{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.CrossCutting", "Sky.Auth.CrossCutting\Sky.Auth.CrossCutting.csproj", "{B749F05E-183D-4103-9025-6E124F620CA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.IoC", "Sky.Auth.IoC\Sky.Auth.IoC.csproj", "{D0906A66-EF3F-4514-9761-E9C2A4ED9911}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{ADDC1813-F781-4976-87CB-635B790C2664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADDC1813-F781-4976-87CB-635B790C2664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADDC1813-F781-4976-87CB-635B790C2664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B749F05E-183D-4103-9025-6E124F620CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B749F05E-183D-4103-9025-6E124F620CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B749F05E-183D-4103-9025-6E124F620CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B749F05E-183D-4103-9025-6E124F620CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0906A66-EF3F-4514-9761-E9C2A4ED9911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

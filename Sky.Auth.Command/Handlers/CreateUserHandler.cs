@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace Sky.Auth.Command.Handlers
 {
-    public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserResponse>
+    public class CreateUserHandler : IRequestHandler<CreateUserCommand, Response<CreateUserResponse>>
     {
-        public Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+
+        public CreateUserHandler()
+        {
+
+        }
+
+        public Task<Response<CreateUserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
