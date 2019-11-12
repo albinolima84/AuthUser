@@ -1,8 +1,8 @@
-﻿using Sky.Auth.Command.Commands;
+﻿using Sky.Auth.Application.Commands;
 using Sky.Auth.Domain.Models;
 using System.Collections.Generic;
 
-namespace Sky.Auth.Command.Extensions
+namespace Sky.Auth.Application.Extensions
 {
     public static class UserCommandExtensions
     {

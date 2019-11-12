@@ -6,6 +6,7 @@ using Sky.Auth.Data.Dtos;
 using Sky.Auth.Data.Extensions;
 using Sky.Auth.Domain.Interfaces;
 using Sky.Auth.Domain.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,6 +54,38 @@ namespace Sky.Auth.Data.Repositories
             }
 
             return user?.ToDomain();
+        }
+
+        public async Task<User> Authenticate(string email, string password)
+        {
+            UserDto user = null;
+
+            var emailFilter = new FilterDefinitionBuilder<UserDto>().Eq("email", email);
+            var passwordFilter = new FilterDefinitionBuilder<UserDto>().Eq("password", password);
+            var filter = Builders<UserDto>.Filter.And(emailFilter, passwordFilter);
+
+            using (IAsyncCursor<UserDto> cursor = await _mongoCollection.FindAsync<UserDto>(filter))
+            {
+                await cursor.MoveNextAsync();
+                if (cursor.Current.Any())
+                {
+                    user = cursor.Current.FirstOrDefault();
+                }
+            }
+
+            return user?.ToDomain();
+        }
+
+        public async Task<bool> UpdateLastLogin(User user)
+        {
+            var userDto = user.ToDto();
+            userDto.LastLogin = DateTime.UtcNow;
+
+            var filter = new FilterDefinitionBuilder<UserDto>().Eq("_id", userDto.ObjectId);
+
+            var result = await _mongoCollection.ReplaceOneAsync(filter, userDto);
+
+            return result.MatchedCount > 0;
         }
     }
 }

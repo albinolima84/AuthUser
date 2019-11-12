@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using Sky.Auth.Command.Responses;
+using Sky.Auth.Application.Responses;
 using System.Collections.Generic;
 
-namespace Sky.Auth.Command.Commands
+namespace Sky.Auth.Application.Commands
 {
-    public class CreateUserCommand : IRequest<Response<CreateUserResponse>>
+    public class CreateUserCommand : IRequest<Response<UserResponse>>
     {
         public string Name { get; }
         public string Email { get; }

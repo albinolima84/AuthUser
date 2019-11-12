@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sky.Auth.Command.Responses
+namespace Sky.Auth.Application.Responses
 {
     public class Response<TValue>
     {

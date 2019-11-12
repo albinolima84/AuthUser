@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sky.Auth.Command\Sky.Auth.Command.csproj" />
+    <ProjectReference Include="..\Sky.Auth.Application\Sky.Auth.Application.csproj" />
     <ProjectReference Include="..\Sky.Auth.CrossCutting\Sky.Auth.CrossCutting.csproj" />
     <ProjectReference Include="..\Sky.Auth.Data\Sky.Auth.Data.csproj" />
   </ItemGroup>

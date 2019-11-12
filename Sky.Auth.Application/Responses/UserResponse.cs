@@ -1,12 +1,12 @@
 ﻿using Sky.Auth.Domain.Models;
 
-namespace Sky.Auth.Command.Responses
+namespace Sky.Auth.Application.Responses
 {
-    public class CreateUserResponse
+    public class UserResponse
     {
         public User User { get; }
 
-        public CreateUserResponse(User user)
+        public UserResponse(User user)
         {
             User = user;
         }

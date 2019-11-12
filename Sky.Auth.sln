@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Api", "Sky.Auth.Api\Sky.Auth.Api.csproj", "{A5442BF7-15A9-4179-AEB4-93C4F2D5AB7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Command", "Sky.Auth.Command\Sky.Auth.Command.csproj", "{ADDC1813-F781-4976-87CB-635B790C2664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Application", "Sky.Auth.Application\Sky.Auth.Application.csproj", "{ADDC1813-F781-4976-87CB-635B790C2664}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Data", "Sky.Auth.Data\Sky.Auth.Data.csproj", "{DC7334B0-40E7-4448-9C33-5C6B64C9EE62}"
 EndProject

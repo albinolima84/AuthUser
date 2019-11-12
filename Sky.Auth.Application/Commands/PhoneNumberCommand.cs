@@ -1,4 +1,4 @@
-﻿namespace Sky.Auth.Command.Commands
+﻿namespace Sky.Auth.Application.Commands
 {
     public class PhoneNumberCommand
     {

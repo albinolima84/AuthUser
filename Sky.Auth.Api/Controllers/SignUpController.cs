@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Sky.Auth.Command.Commands;
-using Sky.Auth.Command.Dtos;
+using Sky.Auth.Application.Commands;
+using Sky.Auth.Application.Responses;
 
 namespace Sky.Auth.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SignUpController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Sky.Auth.Api.Controllers
         }
 
         [HttpPost]
-        //[ProducesResponseType(typeof(CreateCustomerWalletResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(UserResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.InternalServerError)]
@@ -37,7 +37,7 @@ namespace Sky.Auth.Api.Controllers
                 return BadRequest(response.Messages);
             }
 
-            return Ok(response.Value);
+            return Ok(response.Value.User);
         }
     }
 }

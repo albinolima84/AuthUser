@@ -7,7 +7,8 @@ namespace Sky.Auth.Data.Extensions
 {
     public static class UserExtensions
     {
-        internal static User ToDomain(this UserDto userDto) => new User(userDto.ObjectId.ToString(), userDto.Name, userDto.Email, userDto.Password, userDto.PhoneNumbers.ToDomain());
+        internal static User ToDomain(this UserDto userDto) => 
+            new User(userDto.ObjectId.ToString(), userDto.Name, userDto.Email, userDto.Password, userDto.PhoneNumbers.ToDomain(), userDto.Created, userDto.Updated, userDto.LastLogin, userDto.Token);
 
         internal static IReadOnlyCollection<Phone> ToDomain(this IReadOnlyCollection<PhoneDto> phoneDto)
         {
@@ -22,8 +23,8 @@ namespace Sky.Auth.Data.Extensions
         }
 
         internal static UserDto ToDto(this User user) => !string.IsNullOrEmpty(user.Id)  ? 
-            new UserDto { ObjectId = new ObjectId(user.Id), Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto() } : 
-            new UserDto { Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto() };
+            new UserDto { ObjectId = new ObjectId(user.Id), Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto(), Created = user.Created, Updated = user.Updated, LastLogin = user.LastLogin, Token = user.Token } : 
+            new UserDto { Name = user.Name, Email = user.Email, Password = user.Password, PhoneNumbers = user.Phones.ToDto(), Created = user.Created, Updated = user.Updated, LastLogin = user.LastLogin, Token = user.Token };
 
         internal static IReadOnlyCollection<PhoneDto> ToDto (this IReadOnlyCollection<Phone> phone)
         {

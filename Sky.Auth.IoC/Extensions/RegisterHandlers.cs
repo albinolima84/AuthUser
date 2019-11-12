@@ -1,4 +1,4 @@
-﻿using Sky.Auth.Command.Handlers;
+﻿using Sky.Auth.Application.Handlers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

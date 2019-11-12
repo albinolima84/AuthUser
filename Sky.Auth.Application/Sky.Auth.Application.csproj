@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Sky.Auth.Application</AssemblyName>
+    <RootNamespace>Sky.Auth.Application</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
