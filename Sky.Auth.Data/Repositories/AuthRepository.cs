@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Sky.Auth.CrossCutting.Options;
 using Sky.Auth.Data.Connection;
@@ -111,6 +112,24 @@ namespace Sky.Auth.Data.Repositories
             var result = await _mongoCollection.ReplaceOneAsync(filter, userDto);
 
             return result.MatchedCount > 0;
+        }
+
+        public async Task<User> GetUserById(string objectId)
+        {
+            UserDto user = null;
+
+            var filter = Builders<UserDto>.Filter.Eq("_id", new ObjectId(objectId));
+
+            using (IAsyncCursor<UserDto> cursor = await _mongoCollection.FindAsync<UserDto>(filter))
+            {
+                await cursor.MoveNextAsync();
+                if (cursor.Current.Any())
+                {
+                    user = cursor.Current.FirstOrDefault();
+                }
+            }
+
+            return user?.ToDomain();
         }
     }
 }

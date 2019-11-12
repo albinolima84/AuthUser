@@ -12,5 +12,7 @@ namespace Sky.Auth.Domain.Interfaces
         Task<User> Authenticate(string email, string password);
 
         Task<bool> UpdateLastLogin(User user);
+
+        Task<User> GetUserById(string objectId);
     }
 }
