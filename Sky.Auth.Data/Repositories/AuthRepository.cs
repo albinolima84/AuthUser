@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using Sky.Auth.CrossCutting.Options;
 using Sky.Auth.Data.Connection;
@@ -7,7 +8,10 @@ using Sky.Auth.Data.Extensions;
 using Sky.Auth.Domain.Interfaces;
 using Sky.Auth.Domain.Models;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Sky.Auth.Data.Repositories
@@ -18,13 +22,15 @@ namespace Sky.Auth.Data.Repositories
         private readonly IConnect _connect;
         private readonly string _database;
         private readonly string _collection;
+        private readonly string _secret;
 
-        public AuthRepository(IConnect connect, IOptions<MongoOptions> config)
+        public AuthRepository(IConnect connect, IOptions<MongoOptions> config, IOptions<TokenOptions> configToken)
         {
             _database = config?.Value?.Database;
             _collection = config?.Value?.Collection;
             SetConnectAndCollection(connect);
             _connect = connect;
+            _secret = configToken?.Value?.Secret;
         }
 
         internal void SetConnectAndCollection(IConnect connect) => _mongoCollection = connect.Collection<UserDto>(_collection, _database);
@@ -33,9 +39,28 @@ namespace Sky.Auth.Data.Repositories
         {
             var userDto = user.ToDto();
 
+            GenerateToken(userDto);
+
             await _mongoCollection.InsertOneAsync(userDto);
 
             return userDto.ToDomain();
+        }
+
+        private void GenerateToken(UserDto user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.ObjectId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
         }
 
         public async Task<User> GetUserByEmail(string email)
