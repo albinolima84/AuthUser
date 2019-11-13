@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sky.Auth.Api\Sky.Auth.Api.csproj" />
     <ProjectReference Include="..\Sky.Auth.Application\Sky.Auth.Application.csproj" />
     <ProjectReference Include="..\Sky.Auth.Domain\Sky.Auth.Domain.csproj" />
   </ItemGroup>

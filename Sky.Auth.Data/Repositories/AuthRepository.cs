@@ -20,7 +20,6 @@ namespace Sky.Auth.Data.Repositories
     public class AuthRepository : IAuthRepository
     {
         private IMongoCollection<UserDto> _mongoCollection;
-        private readonly IConnect _connect;
         private readonly string _database;
         private readonly string _collection;
         private readonly string _secret;
@@ -30,7 +29,6 @@ namespace Sky.Auth.Data.Repositories
             _database = config?.Value?.Database;
             _collection = config?.Value?.Collection;
             SetConnectAndCollection(connect);
-            _connect = connect;
             _secret = configToken?.Value?.Secret;
         }
 

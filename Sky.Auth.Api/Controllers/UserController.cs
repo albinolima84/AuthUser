@@ -91,11 +91,6 @@ namespace Sky.Auth.Api.Controllers
 
             var response = await _mediator.Send(userId);
 
-            if (response.IsFailure)
-            {
-                return BadRequest(response.Messages);
-            }
-
             var user = response.Value?.User;
 
             if (user is null)
