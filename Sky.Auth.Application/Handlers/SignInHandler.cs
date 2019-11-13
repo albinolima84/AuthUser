@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Sky.Auth.Application.Handlers
 {
-    public class GetUserHandler : IRequestHandler<GetUserQuery, Response<UserResponse>>
+    public class SignInHandler : IRequestHandler<SignInQuery, Response<UserResponse>>
     {
         private readonly IAuthRepository _authRepository;
 
-        public GetUserHandler(IAuthRepository authRepository)
+        public SignInHandler(IAuthRepository authRepository)
         {
             _authRepository = authRepository;
         }
 
-        public async Task<Response<UserResponse>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        public async Task<Response<UserResponse>> Handle(SignInQuery request, CancellationToken cancellationToken)
         {
             try
             {

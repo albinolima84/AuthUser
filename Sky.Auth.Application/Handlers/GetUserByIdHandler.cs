@@ -21,11 +21,7 @@ namespace Sky.Auth.Application.Handlers
             try
             {
                 var user = await _authRepository.GetUserById(request.Id);
-                if (user is null)
-                {
-                    return Response<UserResponse>.Fail("message", "Usuário e/ou senha inválidos");
-                }
-
+                
                 return Response<UserResponse>.Ok(new UserResponse(user));
             }
             catch

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sky.Auth.Api.Helpers;
 using Sky.Auth.Application.Commands;
 using Sky.Auth.Application.Queries;
 using Sky.Auth.Application.Responses;
@@ -48,7 +50,7 @@ namespace Sky.Auth.Api.Controllers
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> SignIn([FromBody] GetUserQuery userQuery)
+        public async Task<IActionResult> SignIn([FromBody] SignInQuery userQuery)
         {
             if (userQuery is null)
             {
@@ -70,27 +72,47 @@ namespace Sky.Auth.Api.Controllers
             return Ok(response.Value.User);
         }
 
-        [Authorize]
-        [HttpGet("{id}")]
+        [Authorize, HttpGet]
+        [Route("{id}")]
         [ProducesResponseType(typeof(UserResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetUser([FromRoute] string userId)
+        public async Task<IActionResult> GetUser([FromRoute] GetUserByIdQuery userId)
         {
-            if (string.IsNullOrEmpty(userId))
+            if (userId is null)
             {
-                return BadRequest("Parâmetros inválidos ou nulos");
+                return BadRequest(CreateErrorResponse("Parâmetros inválidos ou nulos"));
             }
 
-            var response = await _mediator.Send(new GetUserByIdQuery { Id = userId, TokenHeader = string.Empty });
+            var tokenEmail = User.GetUserEmail();
+            var tokenUserId = User.GetUserId();
+
+            var response = await _mediator.Send(userId);
 
             if (response.IsFailure)
             {
                 return BadRequest(response.Messages);
             }
 
-            return Ok(response.Value.User);
+            var user = response.Value?.User;
+
+            if (user is null)
+            {
+                return NoContent();
+            }
+
+            if(user.Email != tokenEmail || user.Id != tokenUserId)
+            {
+                return Unauthorized();
+            }
+
+            if((DateTime.UtcNow - user.LastLogin).TotalMinutes >= 30)
+            {
+                return BadRequest(CreateErrorResponse("Sessão inválida"));
+            }
+
+            return Ok(user);
         }
 
         private IDictionary<string, string> CreateErrorResponse(string message)

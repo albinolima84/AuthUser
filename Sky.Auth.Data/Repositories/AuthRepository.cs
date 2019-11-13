@@ -40,9 +40,11 @@ namespace Sky.Auth.Data.Repositories
         {
             var userDto = user.ToDto();
 
+            await _mongoCollection.InsertOneAsync(userDto);
+
             GenerateToken(userDto);
 
-            await _mongoCollection.InsertOneAsync(userDto);
+            await UpdateUser(userDto);
 
             return userDto.ToDomain();
         }
@@ -55,7 +57,8 @@ namespace Sky.Auth.Data.Repositories
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.ObjectId.ToString())
+                    new Claim(ClaimTypes.Name, user.ObjectId.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -107,11 +110,9 @@ namespace Sky.Auth.Data.Repositories
             var userDto = user.ToDto();
             userDto.LastLogin = DateTime.UtcNow;
 
-            var filter = new FilterDefinitionBuilder<UserDto>().Eq("_id", userDto.ObjectId);
+            GenerateToken(userDto);
 
-            var result = await _mongoCollection.ReplaceOneAsync(filter, userDto);
-
-            return result.MatchedCount > 0;
+            return await UpdateUser(userDto);
         }
 
         public async Task<User> GetUserById(string objectId)
@@ -130,6 +131,15 @@ namespace Sky.Auth.Data.Repositories
             }
 
             return user?.ToDomain();
+        }
+
+        private async Task<bool> UpdateUser(UserDto userDto)
+        {
+            var filter = new FilterDefinitionBuilder<UserDto>().Eq("_id", userDto.ObjectId);
+
+            var result = await _mongoCollection.ReplaceOneAsync(filter, userDto);
+
+            return result.MatchedCount > 0;
         }
     }
 }
