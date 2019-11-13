@@ -87,6 +87,7 @@ namespace Sky.Auth.Api.Controllers
 
             var tokenEmail = User.GetUserEmail();
             var tokenUserId = User.GetUserId();
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
             var response = await _mediator.Send(userId);
 
@@ -102,7 +103,7 @@ namespace Sky.Auth.Api.Controllers
                 return NoContent();
             }
 
-            if(user.Email != tokenEmail || user.Id != tokenUserId)
+            if(token != user.Token || user.Email != tokenEmail || user.Id != tokenUserId)
             {
                 return Unauthorized();
             }
