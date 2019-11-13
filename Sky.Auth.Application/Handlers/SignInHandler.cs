@@ -29,7 +29,7 @@ namespace Sky.Auth.Application.Handlers
                 var user = await _authRepository.Authenticate(request.Email, request.Password);
 
                 if(user != null)
-                    await _authRepository.UpdateLastLogin(user);
+                    user = await _authRepository.UpdateLastLogin(user);
 
                 return Response<UserResponse>.Ok(new UserResponse(user));
             }

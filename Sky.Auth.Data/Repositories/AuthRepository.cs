@@ -107,14 +107,16 @@ namespace Sky.Auth.Data.Repositories
             return user?.ToDomain();
         }
 
-        public async Task<bool> UpdateLastLogin(User user)
+        public async Task<User> UpdateLastLogin(User user)
         {
             var userDto = user.ToDto();
             userDto.LastLogin = DateTime.UtcNow;
 
             GenerateToken(userDto);
 
-            return await UpdateUser(userDto);
+            await UpdateUser(userDto);
+
+            return userDto?.ToDomain();
         }
 
         public async Task<User> GetUserById(string objectId)

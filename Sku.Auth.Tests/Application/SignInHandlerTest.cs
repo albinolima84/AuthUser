@@ -39,6 +39,8 @@ namespace Sky.Auth.Tests.Application
 
             _authRepository.Authenticate(Arg.Any<string>(), Arg.Any<string>()).Returns(new User(OBJECT_ID, NAME, EMAIL, PASSWORD, PHONES, DateTime.UtcNow, DateTime.UtcNow, DateTime.UtcNow, TOKEN));
 
+            _authRepository.UpdateLastLogin(Arg.Any<User>()).Returns(new User(OBJECT_ID, NAME, EMAIL, PASSWORD, PHONES, DateTime.UtcNow, DateTime.UtcNow, DateTime.UtcNow, TOKEN));
+
             var actual = await _handler.Handle(command, CancellationToken.None);
 
             Assert.NotNull(actual);
