@@ -10,8 +10,10 @@ using Sky.Auth.Domain.Interfaces;
 using Sky.Auth.Domain.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +39,8 @@ namespace Sky.Auth.Data.Repositories
         public async Task<User> CreateUser(User user)
         {
             var userDto = user.ToDto();
+
+            userDto.Password = EncodePassword(userDto.Password);
 
             await _mongoCollection.InsertOneAsync(userDto);
 
@@ -88,7 +92,7 @@ namespace Sky.Auth.Data.Repositories
             UserDto user = null;
 
             var emailFilter = new FilterDefinitionBuilder<UserDto>().Eq("email", email);
-            var passwordFilter = new FilterDefinitionBuilder<UserDto>().Eq("password", password);
+            var passwordFilter = new FilterDefinitionBuilder<UserDto>().Eq("password", EncodePassword(password));
             var filter = Builders<UserDto>.Filter.And(emailFilter, passwordFilter);
 
             using (IAsyncCursor<UserDto> cursor = await _mongoCollection.FindAsync<UserDto>(filter))
@@ -138,6 +142,38 @@ namespace Sky.Auth.Data.Repositories
             var result = await _mongoCollection.ReplaceOneAsync(filter, userDto);
 
             return result.MatchedCount > 0;
+        }
+
+        private static string EncodePassword(string password)
+        {
+            var result = string.Empty;
+            var clearText = password.ToLower();
+
+            var bytes = Encoding.Unicode.GetBytes(clearText);
+
+            using (var stream = new MemoryStream())
+            {
+                stream.WriteByte(0);
+
+                using (var md5 = new MD5CryptoServiceProvider())
+                {
+                    var hash = md5.ComputeHash(bytes);
+
+                    stream.Write(hash, 0, hash.Length);
+                    stream.WriteByte(0);
+
+                    using (var sha1 = new SHA1Managed())
+                    {
+                        hash = sha1.ComputeHash(bytes);
+
+                        stream.Write(hash, 0, hash.Length);
+
+                        bytes = stream.ToArray();
+                        result = Convert.ToBase64String(bytes);
+                    }
+                }
+            }
+            return result;
         }
     }
 }
