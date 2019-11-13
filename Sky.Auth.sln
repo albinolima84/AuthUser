@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.CrossCutting", "Sk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.IoC", "Sky.Auth.IoC\Sky.Auth.IoC.csproj", "{D0906A66-EF3F-4514-9761-E9C2A4ED9911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Domain", "Sky.Auth.Domain\Sky.Auth.Domain.csproj", "{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sky.Auth.Domain", "Sky.Auth.Domain\Sky.Auth.Domain.csproj", "{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sky.Auth.Tests", "Sku.Auth.Tests\Sky.Auth.Tests.csproj", "{8AA10EE3-8282-4C74-9641-DACEABC892CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{172799F5-26B9-4AC8-AED1-A951F2D1CDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AA10EE3-8282-4C74-9641-DACEABC892CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AA10EE3-8282-4C74-9641-DACEABC892CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AA10EE3-8282-4C74-9641-DACEABC892CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AA10EE3-8282-4C74-9641-DACEABC892CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
